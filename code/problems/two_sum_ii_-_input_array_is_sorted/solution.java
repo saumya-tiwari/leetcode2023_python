@@ -1,14 +1,21 @@
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
-        LinkedHashMap <Integer, Integer> map = new LinkedHashMap<>();
         
-        for(int i =0; i < numbers.length; i++){
-            int compliment = target - numbers[i];
-            if(map.containsKey(compliment))
-                return new int[]{map.get(compliment), i+1};
-            map.put(numbers[i],i+1);
+        int s = 0;
+        int e = numbers.length - 1;
+        
+     
+        
+        while(numbers[s]+numbers[e] != target){
+            if(numbers[s]+numbers[e] < target)
+                s++;
+            else
+                e--;
         }
         
-        throw new IllegalArgumentException("");
+        
+        
+        return new int[]{s+1,e+1};
+        
     }
 }
