@@ -3,30 +3,25 @@
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) { val = x; }
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
         
-        if(head == null || head.next == null)
-            return head;
+        ListNode prev = null;
+        ListNode curr = head;
         
-        ListNode listToDo = head.next;
-        ListNode reversedList = head;
-        
-        reversedList.next = null;
-        
-        while(listToDo != null){
-            ListNode temp = listToDo;
-            listToDo = listToDo.next;
-            
-            temp.next = reversedList;
-            reversedList = temp;
+        while(curr != null){
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
         }
         
-        return reversedList;
-        
+        return prev;
         
     }
 }
