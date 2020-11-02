@@ -1,17 +1,18 @@
 class Solution {
-    public String reverseString(String s) {
-        char[] ch = s.toCharArray();
-        int start =0;
-        int end = ch.length-1;
+    public void reverseString(char[] s) {
         
-        while(start<end){
-            char temp = ch[start];
-            ch[start] = ch[end];
-            ch[end] = temp;
-            start++;
-            end--;
+        int lastChar = s.length - 1;
+        int firstChar = 0;
+        
+        
+        while(firstChar < lastChar){
+            char temp = s[firstChar];
+            s[firstChar] = s[lastChar];
+           s[lastChar] = temp;
+            firstChar++;
+            lastChar--;
+            
         }
         
-        return String.valueOf(ch);
     }
 }
