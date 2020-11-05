@@ -4,7 +4,13 @@
  *     int val;
  *     TreeNode left;
  *     TreeNode right;
- *     TreeNode(int x) { val = x; }
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
  * }
  */
 class Solution {
@@ -12,11 +18,10 @@ class Solution {
         return isMirror(root, root);
     }
     
-    boolean isMirror(TreeNode node1, TreeNode node2){
-        if(node1 == null && node2 == null)
-            return true;
-        if(node1 != null && node2 != null && node1.val == node2.val)
-            return (isMirror(node1.left, node2.right)&&isMirror(node1.right,node2.left));
-        return false;
+    public boolean isMirror(TreeNode t1, TreeNode t2){
+        if(t1 == null && t2 == null) return true;
+        if(t1 == null || t2 == null) return false;
+        
+        return (t1.val == t2.val) && isMirror(t1.right, t2.left) && isMirror(t1.left,t2.right);
     }
 }
