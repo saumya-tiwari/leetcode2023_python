@@ -1,20 +1,27 @@
 class Solution {
-   public int search(int[] nums, int target) {
+    public int search(int[] nums, int target) {
         
-        int res = searchValue(0, nums.length-1, target, nums);
-        return res;
         
-    }
-    
-    public int searchValue(int start, int end, int target, int[] nums){
-        if(end >= start){
-            int mid = start + (end - start)/ 2;
-            if(target == nums[mid])
+        
+        int start = 0;
+        int end = nums.length -1;
+        int mid = 0;
+        
+        while(start <= end){
+            
+            mid = (start+ end)/2;
+            
+        if(target == nums[mid])
             return mid;
-            if(target < nums[mid])
-                return searchValue(start, mid - 1, target, nums);
-            return searchValue(mid + 1, end, target, nums);
-        }else
-            return -1;
+        else if(target < nums[mid]){
+            end = mid - 1;
+        }else{
+            start = mid + 1;
+        }
+        }
+        
+        
+        return -1;
+        
     }
 }
