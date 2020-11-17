@@ -4,22 +4,46 @@
  *     int val;
  *     TreeNode left;
  *     TreeNode right;
- *     TreeNode(int x) { val = x; }
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
  * }
  */
+
 class Solution {
+   
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list =  new LinkedList<>();
-        inorderTraversal(root, list);
-        return list;
+        LinkedList<Integer> output = new LinkedList<>();
+        LinkedList<TreeNode> stack = new LinkedList<>();
         
-    }
-    
-     public void inorderTraversal(TreeNode root, List<Integer> list) {
-        if(root == null)
-            return;
-         inorderTraversal(root.left, list);
-         list.add(root.val);
-         inorderTraversal(root.right, list);
+        if(root == null) return output;
+        
+        //TreeNode node = root;
+        
+        while(true){
+            
+            if(root != null){
+                stack.push(root);
+                root = root.left;
+            }else{
+                if(stack.isEmpty()) break;
+                
+                root = stack.pop();
+                output.add(root.val);
+                root = root.right;
+            }
+          
+        }
+      
+     
+        
+        
+        return output;
+        
+        
     }
 }
