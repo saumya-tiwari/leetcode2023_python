@@ -4,23 +4,27 @@
  *     int val;
  *     TreeNode left;
  *     TreeNode right;
- *     TreeNode(int x) { val = x; }
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
  * }
  */
 class Solution {
+    LinkedList<Integer> output = new LinkedList<>();
+      
     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> list = new LinkedList<>();
-        postorderTraversal(root, list);
-        return list;
-    }
-    
-    public void postorderTraversal(TreeNode root, List<Integer> list){
-        if(root == null)
-            return;
-        postorderTraversal(root.left, list);
-        postorderTraversal(root.right, list); 
-        list.add(root.val);
-          
-
+       if(root == null) return output;
+       
+        postorderTraversal(root.left);
+        postorderTraversal(root.right);
+        output.add(root.val);
+       
+        
+       return output;
+        
     }
 }
