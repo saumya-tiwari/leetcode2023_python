@@ -1,18 +1,20 @@
 class Solution {
     public boolean validMountainArray(int[] arr) {
         
+       int i = 0;
+       int j = arr.length - 1;
         
-        int N = arr.length;
-        int i = 0;
         
-        while(i+1 < N && arr[i] < arr[i + 1])
-            i++;
+       if(arr.length < 3)
+           return false;
         
-        if(i == 0 || i == N-1) return false;
+        while(i + 1 < arr.length - 1 && arr[i + 1] > arr [i]) i++;
+        while(j - 1 > 0 && arr[j - 1] > arr[j]) j--;
         
-        while(i+1 < N && arr[i] > arr[i+1])
-            i++;
+     
         
-        return i == N-1;
+        return (i == j);
+        
+        
     }
 }
