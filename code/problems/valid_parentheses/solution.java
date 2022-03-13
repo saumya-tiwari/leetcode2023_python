@@ -7,17 +7,17 @@ class Solution {
       
         
          for(char c : s.toCharArray()){
-           if(c == '(' || c == '[' || c == '{')
+           if(c == '(' || c == '{' || c == '[' )
                stack.push(c);
-             else if(c == ')' && !stack.isEmpty() && stack.peek() == '(')
+             else if(!stack.isEmpty() && stack.peek() == '(' && c == ')')
                  stack.pop();
-             else if(c == '}' && !stack.isEmpty() && stack.peek() == '{')
+              else if(!stack.isEmpty() && stack.peek() == '[' && c == ']')
                  stack.pop();
-             else if(c == ']' && !stack.isEmpty() && stack.peek() == '[')
+              else if( !stack.isEmpty() && stack.peek() == '{' && c == '}')
                  stack.pop();
              else
-                 stack.push(c);
-        }
+                stack.push(c);
+    }
         
         
         return stack.isEmpty();
