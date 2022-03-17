@@ -1,18 +1,36 @@
 class Solution {
     public int[] intersect(int[] arr1, int[] arr2) {
-      int map[] = new int[1001]; 
-        int res[]  = new int[Math.min(arr1.length, arr2.length)]; 
-        for (int i = 0; i < arr2.length; i++) {
-            map[arr2[i]]++; 
-        }
-        int j = 0;
-        for (int i = 0; i < arr1.length; i++) {
-            if (map[arr1[i]] > 0) { // if frequency of value is greater than 0 then add that element to array
-                res[j++] = arr1[i];
-                map[arr1[i]]--; // decrement its count
+      int i  = 0;
+        int j  = 0;
+        
+        int p = 0;
+        
+        int max_size  = 0;
+        
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        
+        if(arr1.length > arr2.length)
+            max_size = arr1.length;
+        else
+            max_size = arr2.length;
+        
+        int[] res = new int[max_size];
+        
+        while(i < arr1.length && j < arr2.length){
+            if(arr1[i] < arr2[j])
+                i++;
+            else if(arr1[i] > arr2[j])
+               j++;
+            else if(arr1[i] == arr2[j]){
+                  res[p++] = arr1[i];
+                  i++;
+                j++;
             }
+              
+        
         }
         
-        return Arrays.copyOf(res, j); // return resultant array with range upto size length of last added element
+        return Arrays.copyOfRange(res, 0, p);
     }
 }
