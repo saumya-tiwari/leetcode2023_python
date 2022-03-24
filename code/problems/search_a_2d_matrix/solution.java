@@ -1,36 +1,28 @@
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-          int l = 0;
+        
         int r = matrix.length;
-        while (l < r) {
-            int mid = l + (r - l) / 2;
-            if (matrix[mid][0] == target) return true;
-            if (matrix[mid][0] > target) {
-                r = mid;
-            } else {
-                l = mid + 1;
-            }
-        }
+         if (r == 0)
+            return false;
         
-        int row = Math.max(0, l - 1);
-        
-        // locate col, find the col where tis first element >= target
-        l = 0;
-        r = matrix[0].length;
-        while (l < r) {
-            int mid = l + (r - l) / 2;
-            if (matrix[row][mid] == target) return true;
-            if (matrix[row][mid] > target) {
-                r = mid;
-            } else {
-                l = mid + 1;
-            }
-        }
-        
-        if (l < matrix[0].length && matrix[row][l] == target) {
-            return true;
+        int c = matrix[0].length;
+                       
+                       
+        int left = 0; int right = (r * c) - 1;
+                       
+        while(left <= right){
+            int mid = (left + right) / 2;
+            
+            if(target == matrix[mid / c][mid % c])
+                return true;
+            else if(target < matrix[mid / c][mid % c]){
+                right = mid - 1;
+            }else
+                left = mid + 1;
+                
         }
         
         return false;
+        
     }
 }
