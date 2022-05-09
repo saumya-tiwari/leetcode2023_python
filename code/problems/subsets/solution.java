@@ -1,40 +1,29 @@
 class Solution {
     
-    List<List<Integer>> subsets = new ArrayList<>();
+    List<List<Integer>> res = new ArrayList<>();
     
     public List<List<Integer>> subsets(int[] nums) {
         
-        //List<List<Integer>> subsets = new ArrayList<>();
-        
-        
-        List<Integer> op = new ArrayList<>();
-        
-        subsets = findSubsets(nums ,op);
-        
-        return subsets;
+        //res.add(new ArrayList<>()); 
+        List<Integer> curr = new ArrayList<>();
+        backtrack(0, curr, nums);
+        return res;
         
     }
     
-    public List<List<Integer>> findSubsets( int[] ip,  List<Integer> op) {
+    
+    public void backtrack(int index, List<Integer> list, int[] nums){
+        if(index >= nums.length){
+            res.add(new ArrayList<>(list));
+            return;
+        }
         
-       if(ip.length == 0){
-          subsets.add(op);
-          return subsets;
-       }
+        list.add(nums[index]);
+        backtrack(index + 1, list, nums);
         
-        List<Integer> op1 = new ArrayList<>(op);
-        List<Integer> op2 = new ArrayList<>(op);
-        
-        op2.add(ip[0]);
+        list.remove(list.size() - 1);
+        backtrack(index + 1, list, nums);
+            //list.remove(i);     
        
-        int[] nums = Arrays.copyOfRange(ip, 1, ip.length);
-        
-        
-        findSubsets(nums, op1);
-        findSubsets(nums, op2);
-       
-       
-        return subsets;
-          
     }
 }
