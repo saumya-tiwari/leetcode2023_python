@@ -10,25 +10,39 @@
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-
-        // Value of current node or parent node.
-        int parentVal = root.val;
-
-        // Value of p
-        int pVal = p.val;
-
-        // Value of q;
-        int qVal = q.val;
-
-        if (pVal > parentVal && qVal > parentVal) {
-            // If both p and q are greater than parent
-            return lowestCommonAncestor(root.right, p, q);
-        } else if (pVal < parentVal && qVal < parentVal) {
-            // If both p and q are lesser than parent
-            return lowestCommonAncestor(root.left, p, q);
-        } else {
-            // We have found the split point, i.e. the LCA node.
-            return root;
+        
+       
+        
+      // if( p.val > root.val  && root.val < q.val)
+        //   return lowestCommonAncestor(root.right, p, q);
+        
+     //   else if( root.val > p.val && root.val > q.val)
+     //      return lowestCommonAncestor(root.left, p, q);
+        
+     //   else
+         //  return root;
+        
+        TreeNode node = root;
+        
+        
+        while(node != null){
+            
+            if(node.val > q.val && node.val > p.val)
+                node = node.left;
+            else if(node.val < q. val && node.val < p.val)
+                node = node.right;
+            
+            else
+                return node;
+            
+            
         }
+        
+        
+        return root;
+        
+        
+        
+        
     }
 }
