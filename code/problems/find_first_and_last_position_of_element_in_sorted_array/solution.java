@@ -1,37 +1,54 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         
+        int firstOccurance = findFirstOccurance(nums, target);
+        int lastOccurance = findLastOccurance(nums, target);
         
-        int firstOccurence = findIndex(nums, target, true);
-        int secondOccurence = findIndex(nums, target, false);
-          
-        return new int[]{firstOccurence, secondOccurence};
+        return new int[]{firstOccurance, lastOccurance};
+        
     }
     
-    
-    int findIndex(int[] nums, int target, boolean isFirst){
-         int start = 0;
+    int findFirstOccurance(int[] nums, int target){
+        int start = 0;
         int end = nums.length - 1;
         
-        int res = -1;
+        int result = -1;
         
         while(start <= end){
-            int mid = start + (end - start)/ 2;
+            int mid = (start + end) / 2;
             
-            if(target == nums[mid]){
-                  res= mid;
-               if(isFirst)
-                    end = mid - 1;
-                else
-                    start = mid + 1;
-            }
-            
-            else if(target < nums[mid])
+            if(nums[mid] == target){
+                result = mid;
                 end = mid - 1;
-            else
+            }else if(nums[mid] > target){
+                end = mid - 1;
+            }else{
                 start = mid + 1;
+            }
         }
+        
+        return result;
+    }
+    
+     int findLastOccurance(int[] nums, int target){
+          int start = 0;
+        int end = nums.length - 1;
+        
+        int result = -1;
+        
+        while(start <= end){
+           int mid = (start + end) / 2;
             
-            return res;
+            if(nums[mid] == target){
+                result = mid;
+                start = mid + 1;
+            }else if(nums[mid] > target){
+                end = mid - 1;
+            }else{
+                start = mid + 1;
+            }
+        }
+        
+        return result;
     }
 }
