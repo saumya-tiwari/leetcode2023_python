@@ -14,42 +14,16 @@
  * }
  */
 class Solution {
-    List<Integer> res = new ArrayList<>();
-
-    // public List<Integer> inorderTraversal(TreeNode root) {
-
-    // if(root ==  null)
-    //   return res;
-    //  inorderTraversal(root.left);
-    //  res.add(root.val);
-    // inorderTraversal(root.right);
-
-    //  return res;
-
-    //   }
-
+    List<Integer> list = new ArrayList<>();
     public List<Integer> inorderTraversal(TreeNode root) {
-        if (root == null) return res;
-
-        Deque<TreeNode> stack = new ArrayDeque<>();
-
-        //stack.add(root);
+        if(root == null)
+            return list;
         
-        TreeNode curr = root;
-
-        while (curr != null || !stack.isEmpty()) {
-         
-            
-            while( curr != null){
-                stack.push(curr);
-                curr = curr.left;
-            }
-           
-            curr = stack.pop();
-            res.add(curr.val);
-            curr = curr.right;
-        }
-
-        return res;
+        inorderTraversal(root.left);
+        list.add(root.val);
+        inorderTraversal(root.right);
+        
+        return list;
+        
     }
 }
