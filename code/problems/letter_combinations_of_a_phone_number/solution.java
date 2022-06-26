@@ -1,36 +1,42 @@
 class Solution {
-    List<String> combinations = new ArrayList<>();
-    String digits;
     
-    Map<Character, String> charMap = Map.of(
-        '2', "abc", '3', "def", '4', "ghi", '5', "jkl", 
-        '6', "mno", '7', "pqrs", '8', "tuv", '9', "wxyz");
-    
+    Map<String,String> map = new HashMap<>();
     public List<String> letterCombinations(String digits) {
-        this.digits = digits;
-          if (digits.length() == 0) {
-            return combinations;
-        }
-         backtrack(0, new StringBuilder());
-        return combinations;
+        
+       
+         map.put("2","abc");
+         map.put("3","def");
+         map.put("4","ghi");
+         map.put("5","jkl");
+         map.put("6","mno");
+         map.put("7","pqrs");
+         map.put("8","tuv");
+         map.put("9","wxyz");
+        
+        List<String> result = new ArrayList<>();
+        
+         if(digits.length() == 0)
+             return result;
+               
+        findCombinations(result, new StringBuilder(), digits, 0);      
+        return result;
+        
     }
     
-    void backtrack(int index, StringBuilder combination){
-        if(this.digits.length() == combination.length()){
-            combinations.add(new String(combination));
+    private void findCombinations(List<String> res, StringBuilder str, String digits, int index){
+        if(digits.length() == str.length()){
+            res.add(str.toString());
             return;
         }
         
-        char ch = digits.charAt(index);
-        String letter = charMap.get(ch);
+        String key = map.get(String.valueOf(digits.charAt(index)));
         
-        for(int i  = 0; i < letter.length(); i++){
-            combination.append(letter.charAt(i));
-            backtrack(index + 1, combination);
+        for(char c: key.toCharArray()){
+            str.append(c);
+            findCombinations(res, str, digits, index + 1);          
+            str.deleteCharAt(str.length() - 1);        
             
-            combination.deleteCharAt(combination.length() - 1);
         }
-        
         
     }
 }
