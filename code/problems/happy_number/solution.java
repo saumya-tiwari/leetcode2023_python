@@ -1,23 +1,26 @@
 class Solution {
     public boolean isHappy(int n) {
-    int slow, fast;
-    slow = fast = n;
-    do {
-        slow = digitSquareSum(slow);
-        fast = digitSquareSum(fast);
-        fast = digitSquareSum(fast);
-    } while(slow != fast);
-    if (slow == 1) return true;
-    else return false;
+        
+        Set<Integer> seen = new HashSet<>();
+        
+        while(n != 1 && !seen.contains(n)){
+            seen.add(n);
+            n = getNext(n);
+        }
+        
+        return n == 1;
     }
     
-int digitSquareSum(int n) {
-    int sum = 0,a=0;
-    while(n > 0){
-        a = n % 10;
-        sum+= a * a;
-        n = n / 10;
+    int getNext(int n){
+        int sum = 0;
+        while(n > 0){
+            int d = n % 10;
+            n = n / 10;
+            sum += d * d;
+            
+            
+        }
+        
+        return sum;
     }
-    return sum;
-}
 }
