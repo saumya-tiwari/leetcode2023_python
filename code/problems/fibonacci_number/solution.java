@@ -1,20 +1,12 @@
 class Solution {
-    
-    Map<Integer, Integer> cache = new HashMap<>();
     public int fib(int n) {
         
-       if(cache.get(n) != null)
-           return cache.get(n);
+        if(n == 0)
+            return 0;
+        else if(n == 1)
+            return 1;
         
-        int value = 0;
-        
-        if(n < 2)
-            return n;
-        else
-            value = fib(n -1) + fib(n - 2);
-        
-        cache.put(n ,  value);
-        return value;
+        else return fib( n - 1) + fib (n - 2);
         
     }
 }
