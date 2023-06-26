@@ -16,4 +16,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
           leetcode-session: ${{ secrets.LEETCODE_SESSION }}
-          destination-folder: python
+          destination-folder: code
